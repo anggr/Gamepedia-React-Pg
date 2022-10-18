@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Binar Chapter 8 ",
+    "description": "Chpater 8 API",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "API Documentation Challenge",
+      "description": "API binar chapter 8 challenge"
+    }
+  ],
+  "paths": {
+    "/players": {
+      "post": {
+        "tags": [
+          "API Documentation Challenge"
+        ],
+        "summary": "Create a new player",
+        "consumes": [
+          "application/x-www-form-urlencoded",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "player",
+            "description": "The player to create.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "username",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "experience": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "SUCCESS"
+                },
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "The player ID."
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "The player username."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The player email."
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "The player password."
+                    },
+                    "experience": {
+                      "type": "integer",
+                      "description": "The player experience."
+                    },
+                    "lvl": {
+                      "type": "integer",
+                      "description": "The player level."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "username or email or password field cannot be empty"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Some error occured while creating the Player"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "API Documentation Challenge"
+        ],
+        "summary": "Gets a list of players",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "username",
+            "type": "string",
+            "description": "The player username"
+          },
+          {
+            "in": "query",
+            "name": "email",
+            "type": "string",
+            "description": "The player email"
+          },
+          {
+            "in": "query",
+            "name": "experience",
+            "type": "integer",
+            "description": "The player experience"
+          },
+          {
+            "in": "query",
+            "name": "lvl",
+            "type": "integer",
+            "description": "The player level"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "SUCCESS"
+                },
+                "message": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "The player ID"
+                      },
+                      "username": {
+                        "type": "string",
+                        "description": "The player username"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "The player email"
+                      },
+                      "password": {
+                        "type": "string",
+                        "description": "The player password"
+                      },
+                      "experience": {
+                        "type": "integer",
+                        "description": "The player experience"
+                      },
+                      "lvl": {
+                        "type": "integer",
+                        "description": "The player level"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Some error occured while retrieving players"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/players/{id}": {
+      "get": {
+        "tags": [
+          "API Documentation Challenge"
+        ],
+        "summary": "Gets a list of player by ID.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "The player ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "The player ID."
+                    },
+                    "username": {
+                      "type": "string",
+                      "description": "The player username."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The player email"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "The player password"
+                    },
+                    "experience": {
+                      "type": "integer",
+                      "description": "The player experience"
+                    },
+                    "lvl": {
+                      "type": "integer",
+                      "description": "The player level"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error retrieving Player with id={id}."
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "API Documentation Challenge"
+        ],
+        "summary": "Update a Player by the ID in the request.",
+        "consumes": [
+          "application/x-www.form-urlencoded",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "The player ID."
+          },
+          {
+            "in": "body",
+            "name": "player",
+            "description": "The player to update.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "experience": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Player was updated successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAIED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Cannot update Player with id={id}. Maybe Player was not found or req.body is empty!"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error updating Player with id={id}"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "API Documentation Challenge"
+        ],
+        "summary": "Delete a Player with ID.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "The player ID."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Player was deleted successfully!"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Cannot delete Player with id={id}. Maybe Player was not found!"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Could not delete Player with id={id}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/players/exp/{id}": {
+      "post": {
+        "tags": [
+          "API Documentation Challenge"
+        ],
+        "summary": "Gets a experience of player by ID.",
+        "consumes": [
+          "application/x-www.form-urlencoded",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "The player ID."
+          },
+          {
+            "in": "body",
+            "name": "player",
+            "description": "The experience of player to create.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "experience"
+              ],
+              "properties": {
+                "experience": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "SUCCESS"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Player with id={id} has more experience"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "exp field cannot be empty"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "string",
+                  "description": "FAILED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Error updating Player exp with id={id}"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
